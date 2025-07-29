@@ -1,0 +1,29 @@
+/* hero.css */
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
+  background: none !important;   /* Removed circular background */
+  border-radius: 0 !important;
+  width: auto;
+  height: auto;
+  font-size: 32px !important;    /* Optional: increase icon size */
+}
+
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.swiper-pagination-bullet {
+  background: #ffffff !important;
+  opacity: 0.4;
+  margin: 0 4px !important;
+  width: 10px;
+  height: 10px;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ffffff !important;
+  opacity: 1;
+}
