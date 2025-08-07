@@ -5,7 +5,6 @@ import History from "@/components/History";
 import CarbonFiber from "@/components/CarbonFiber";
 import SkateFoam from "@/components/SkateFoam";
 import OnePieceConstruction from "@/components/OnePieceConstruction";
-import Footer from "@/components/Footer"; // ✅ import Footer
 
 export default function Home() {
   return (
@@ -15,7 +14,6 @@ export default function Home() {
       <CarbonFiber />
       <SkateFoam />
       <OnePieceConstruction />
-      <Footer /> 
     </main>
   );
 }

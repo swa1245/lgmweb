@@ -166,7 +166,7 @@ const ContactPage = () => {
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-blue-900 mb-2">
+          <h1 className="text-4xl font-bold text-blue-900 ">
             Get In Touch
           </h1>
           <p className="text-gray-600 text-lg">
@@ -293,10 +293,6 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
-      {/* Footer */}
-      <footer className="text-black  py-6  ">
-        <Footer />
-      </footer>
     </div>
   );
 };

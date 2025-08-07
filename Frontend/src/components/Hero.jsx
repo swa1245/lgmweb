@@ -170,7 +170,7 @@ const Hero = () => {
   const router = useRouter()
 
   return (
-    <div className="font-['Poppins'] relative z-10">
+    <div className="font-['Arimo'] relative z-10">
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
@@ -181,7 +181,7 @@ const Hero = () => {
       >
         {slideGroups.map((group, index) => (
           <SwiperSlide key={index}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 bg-white h-full">
               {group.map((slide, idx) => (
                 <div
                   key={idx}

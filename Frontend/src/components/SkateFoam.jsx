@@ -12,9 +12,9 @@ const SkateFoam = () => {
       <div className="container mx-auto px-6 md:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row-reverse items-center gap-16 lg:gap-20">
           {/* Text content */}
-          <div className="lg:w-1/2 space-y-10 text-center lg:text-left font-['Poppins']">
-            <div className="space-y-4">
-              <div className="inline-block px-3 py-1 border-l-2 border-sky-500 text-sky-600 text-sm font-medium tracking-wider">
+          <div className="lg:w-1/2 space-y-10 text-center lg:text-left font-[Arimo]">
+            <div className="space-y-4 font-[Arimo]">
+              <div className="inline-block px-3 py-1 border-l-2 border-sky-500 text-sky-600 text-sm font-medium tracking-wider font-[Arimo]">
                 PREMIUM QUALITY
               </div>
               <h2 className="text-4xl md:text-5xl font-light text-gray-900 leading-tight">
@@ -23,14 +23,14 @@ const SkateFoam = () => {
               <div className="h-px w-16 bg-gray-300 mx-auto lg:mx-0"></div>
             </div>
 
-            <p className="text-gray-600 text-lg font-light leading-relaxed">
+            <p className="text-gray-600 text-lg font-light leading-relaxed ">
               Unlike most brands of inline skates, we exclusively use closed cell memory foam.
               It doesn’t absorb water or sweat, keeping your skates dry and fresh.
             </p>
 
             <div className="flex justify-center lg:justify-start items-center gap-4">
               <div className="h-px w-12 bg-gray-300"></div>
-              <span className="text-orange-500 font-light text-sm">02</span>
+              <span className="text-orange-500 font-light text-sm font-[Arimo]">02</span>
             </div>
           </div>
 
@@ -45,11 +45,11 @@ const SkateFoam = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"></div>
 
-                <div className="absolute bottom-0 left-0 p-6 w-full">
-                  <h3 className="text-white text-2xl font-light mb-2 font-['Poppins']">
+                <div className="absolute bottom-0 left-0 p-6 w-full ">
+                  <h3 className="text-white text-2xl font-light mb-2 font-[Arimo]">
                     Premium <span className="font-semibold">Quality</span>
                   </h3>
-                  <p className="text-gray-200 text-sm font-light max-w-xs font-['Poppins']">
+                  <p className="text-gray-200 text-sm font-light max-w-xs font-[Arimo]">
                     Closed-cell memory foam for superior comfort & moisture resistance
                   </p>
                 </div>
