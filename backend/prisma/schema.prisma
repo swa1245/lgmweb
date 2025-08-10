@@ -1,3 +1,56 @@
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+// model user {
+//   id       Int     @id @default(autoincrement())
+//   name     String
+//   email    String  @unique
+//   password String
+//   phone    String?
+// }
+
+// model admin {
+//   id       Int     @id @default(autoincrement())
+//   adminId  String  @unique
+//   password String
+// }
+
+
+// model Order {
+//   id           Int       @id @default(autoincrement())
+//   firstName    String
+//   lastName     String
+//   email        String
+//   phone        String
+//   address      String
+//   city         String
+//   state        String
+//   pincode      String
+//   paymentMethod String
+//   totalAmount  Int
+//   items        OrderItem[]
+//   createdAt    DateTime  @default(now())
+// }
+
+// model OrderItem {
+//   id       Int    @id @default(autoincrement())
+//   name     String
+//   quantity Int
+//   price    Int
+//   order    Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+//   orderId  Int
+// }
+
+
+
+
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -21,28 +74,88 @@ model admin {
   password String
 }
 
+// model Order {
+//   id             Int          @id @default(autoincrement())
+//   firstName      String
+//   lastName       String
+//   email          String
+//   phone          String
+//   address        String
+//   city           String
+//   state          String
+//   pincode        String
+//   paymentMethod  String
+//   totalAmount    Int
+//   items          OrderItem[]
+//   createdAt      DateTime     @default(now())
+
+//   razorpayOrderId   String?     // Razorpay Order ID
+//   razorpayPaymentId String?     // Razorpay Payment ID
+//   razorpaySignature String?     // Razorpay Signature
+//   paymentStatus     String?     // e.g., "success", "failed"
+// }
+
+
+
+
 
 model Order {
-  id           Int       @id @default(autoincrement())
-  firstName    String
-  lastName     String
-  email        String
-  phone        String
-  address      String
-  city         String
-  state        String
-  pincode      String
-  paymentMethod String
-  totalAmount  Int
-  items        OrderItem[]
-  createdAt    DateTime  @default(now())
+  id                 Int          @id @default(autoincrement())
+  firstName          String
+  lastName           String
+  email              String
+  phone              String
+  address            String
+  city               String
+  state              String
+  pincode            String
+  paymentMethod      String
+  totalAmount        Int          // stored in **paise**
+  items              OrderItem[]
+  createdAt          DateTime     @default(now())
+
+  razorpayOrderId    String?      // Razorpay Order ID
+  razorpayPaymentId  String?      // Razorpay Payment ID
+  razorpaySignature  String?      // Razorpay Signature
+  paymentStatus      String       @default("pending")
 }
+
+
+
+
+
+
+// model OrderItem {
+//   id       Int    @id @default(autoincrement())
+//   name     String
+//   quantity Int
+//   price    Int
+//   order    Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+//   orderId  Int
+// }
+
+
+
+
 
 model OrderItem {
   id       Int    @id @default(autoincrement())
   name     String
   quantity Int
-  price    Int
+  price    Int    // stored in paise
   order    Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
   orderId  Int
+}
+
+
+
+
+model Product {
+  id            Int      @id @default(autoincrement())
+  name          String
+  description   String?
+  price         Int
+  imageUrl      String?
+  stockQuantity Int      // 👈 this is the key field for stock
+  createdAt     DateTime @default(now())
 }

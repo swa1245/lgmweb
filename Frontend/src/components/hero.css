@@ -2,11 +2,11 @@
 .swiper-button-next,
 .swiper-button-prev {
   color: white !important;
-  background: none !important;   /* Removed circular background */
+  background: none !important;  
   border-radius: 0 !important;
   width: auto;
   height: auto;
-  font-size: 32px !important;    /* Optional: increase icon size */
+  font-size: 32px !important;   
 }
 
 

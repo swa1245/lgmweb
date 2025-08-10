@@ -1,43 +1,3 @@
-// 'use client';
-
-// import React from 'react';
-// import Link from 'next/link';
-// import Footer from '@/components/Footer';
-
-// const CartPage = () => {
-//   return (
-//     <>
-//       <main className="flex flex-col justify-between min-h-[100dvh] bg-gray-50 ">
-//         {/* Cart Content */}
-//         <div className="px-4 py-10 md:px-20 flex-1">
-//           <h1 className="text-2xl md:text-3xl font-bold mb-8 text-gray-800">Your Shopping Cart</h1>
-
-//           <div className="flex flex-col items-center justify-center text-center space-y-4 bg-white py-12 px-4 rounded shadow-md">
-//             <h2 className="text-xl font-semibold text-gray-700">Your cart is currently empty</h2>
-//             <p className="text-gray-500">Looks like you haven’t added anything to your cart yet.</p>
-//             <Link href="/">
-//               <button className="bg-orange-400 hover:bg-orange-600 text-white px-5 py-2 rounded-full transition">
-//                 Continue Shopping
-//               </button>
-//             </Link>
-//           </div>
-//         </div>
-
-//               {/* Footer */}
-//               <footer className="text-black  py-6  ">
-//                 <Footer />
-//               </footer>
-//       </main>
-//     </>
-//   );
-// };
-
-
-
-
-
-
-// export default CartPage;
 "use client";
 
 import React, { useEffect } from "react";
@@ -115,7 +75,6 @@ const CartPage = () => {
                   key={`${item.id}-${item.type}`}
                   className="bg-white rounded-xl p-4 md:p-6 shadow-lg flex flex-col sm:flex-row items-start sm:items-center gap-4 md:gap-6"
                 >
-                  {/* Uncomment if using images */}
                   <div className="w-20 h-20 md:w-24 md:h-24 flex-shrink-0 mx-auto sm:mx-0">
                     <img
                       src={item.image}
@@ -141,7 +100,6 @@ const CartPage = () => {
                       <button
                         onClick={() => decrementQuantity(item.id, item.type)}
                         className="px-3 py-1 text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
-                        aria-label="Decrease quantity"
                       >
                         -
                       </button>
@@ -151,7 +109,6 @@ const CartPage = () => {
                       <button
                         onClick={() => incrementQuantity(item.id, item.type)}
                         className="px-3 py-1 text-gray-600 hover:text-gray-900 hover:bg-gray-100 relative group"
-                        aria-label="Increase quantity"
                       >
                         <span className="absolute inset-0 bg-orange-100 opacity-0 group-hover:opacity-30 transition-opacity"></span>
                         +
@@ -161,7 +118,6 @@ const CartPage = () => {
                     <button
                       onClick={() => removeFromCart(item.id, item.type)}
                       className="text-red-500 hover:text-red-600 transition-colors p-1.5"
-                      aria-label="Remove item"
                     >
                       <svg
                         className="w-5 h-5"

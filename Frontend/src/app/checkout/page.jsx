@@ -48,43 +48,54 @@ export default function CheckoutPage() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setErrors({});
+  e.preventDefault();
+  setIsSubmitting(true);
+  setErrors({});
 
-    const totalAmount = calculateTotalWithGST(cartTotal, deliveryCharge);
+  const totalAmount = calculateTotalWithGST(cartTotal, deliveryCharge);
 
-    try {
-      const response = await fetch("http://localhost:5000/api/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          formData,
-          cart,
-          totalAmount,
-        }),
-      });
+  // Online Payment redirect
+  if (formData.paymentMethod === "razorpay") {
+    localStorage.setItem("checkoutData", JSON.stringify({
+      formData,
+      cart,
+      totalAmount,
+    }));
+    router.push("/payment");
+    return;
+  }
 
-      const data = await response.json();
+  try {
+    const response = await fetch("http://localhost:5000/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        formData,
+        cart,
+        totalAmount,
+      }),
+    });
 
-      if (data.success) {
-        localStorage.removeItem("cart");
+    const data = await response.json();
 
-        toast.success("Order placed successfully!");
-
-        router.push("/userProfile");
-      } else {
-        toast.error("Failed to place order. Try again.");
-      }
-    } catch (err) {
-      console.error("Order Error:", err);
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+    if (data.success) {
+      localStorage.removeItem("cart");
+      toast.success("Order placed successfully!");
+      router.push("/userProfile");
+    } else {
+      toast.error("Failed to place order. Try again.");
     }
-  };
+  } catch (err) {
+    console.error("Order Error:", err);
+    toast.error("Something went wrong. Please try again.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
+
 
   if (cart.length === 0) {
     return (
@@ -271,6 +282,17 @@ export default function CheckoutPage() {
             </button>
           </form>
 
+
+
+
+
+
+
+
+
+
+
+
           <div className="w-full lg:w-1/3">
             <div className="bg-white rounded-xl shadow p-6 sticky top-20">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
@@ -345,8 +367,14 @@ export default function CheckoutPage() {
               </div>
             </div>
           </div>
+
+
+
+          
         </div>
       </div>
     </div>
   );
 }
+
+

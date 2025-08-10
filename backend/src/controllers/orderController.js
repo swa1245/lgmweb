@@ -1,8 +1,14 @@
-import prisma from "../lib/prismaClient.js"; 
+
+import prisma from "../lib/prismaClient.js";
+
 
 export const createOrder = async (req, res) => {
   try {
-    const { formData, cart, totalAmount } = req.body;
+    const { formData, cart, totalAmountPaise } = req.body;
+
+    if (!formData || !cart || typeof totalAmountPaise !== "number") {
+      return res.status(400).json({ success: false, message: "Missing order data" });
+    }
 
     const order = await prisma.order.create({
       data: {
@@ -15,12 +21,13 @@ export const createOrder = async (req, res) => {
         state: formData.state,
         pincode: formData.pincode,
         paymentMethod: formData.paymentMethod,
-        totalAmount: totalAmount,
+        totalAmount: totalAmountPaise, // store paise
+        paymentStatus: "pending",
         items: {
           create: cart.map((item) => ({
             name: item.name,
             quantity: item.quantity,
-            price: item.price,
+            price: item.price, // price must be in paise
           })),
         },
       },
@@ -32,8 +39,6 @@ export const createOrder = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
-
-
 
 
 
