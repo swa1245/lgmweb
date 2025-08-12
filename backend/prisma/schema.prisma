@@ -98,7 +98,6 @@ model admin {
 
 
 
-
 model Order {
   id                 Int          @id @default(autoincrement())
   firstName          String
@@ -110,13 +109,13 @@ model Order {
   state              String
   pincode            String
   paymentMethod      String
-  totalAmount        Int          // stored in **paise**
+  totalAmount        Int          // stored in paise
   items              OrderItem[]
   createdAt          DateTime     @default(now())
 
-  razorpayOrderId    String?      // Razorpay Order ID
-  razorpayPaymentId  String?      // Razorpay Payment ID
-  razorpaySignature  String?      // Razorpay Signature
+  razorpayOrderId    String?      @unique // must be unique
+  razorpayPaymentId  String?     
+  razorpaySignature  String?     
   paymentStatus      String       @default("pending")
 }
 
@@ -156,6 +155,6 @@ model Product {
   description   String?
   price         Int
   imageUrl      String?
-  stockQuantity Int      // 👈 this is the key field for stock
+  stockQuantity Int      
   createdAt     DateTime @default(now())
 }

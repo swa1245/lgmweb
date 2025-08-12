@@ -8,7 +8,7 @@ import {
   Phone,
   MapPin,
   CreditCard,
-  IndianRupee,  
+  IndianRupee,
   Clock,
   Package,
   Boxes,
@@ -59,13 +59,16 @@ export default function AdminDashboard() {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/api/products/${productId}/stock`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ stockQuantity: updatedStock }),
-      });
+      const res = await fetch(
+        `http://localhost:5000/api/products/${productId}/stock`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ stockQuantity: updatedStock }),
+        }
+      );
 
       const data = await res.json();
       if (data.success) {
@@ -80,11 +83,11 @@ export default function AdminDashboard() {
           return rest;
         });
       } else {
-        alert("❌ Failed to update stock.");
+        alert("Failed to update stock.");
       }
     } catch (err) {
       console.error("Error updating stock:", err);
-      alert("❌ Something went wrong.");
+      alert("Something went wrong.");
     }
   };
 
@@ -124,80 +127,69 @@ export default function AdminDashboard() {
 
         {/* Orders Tab */}
         {activeTab === "orders" && (
-          <div className="overflow-x-auto bg-white shadow-xl rounded-lg">
-            <table className="min-w-full text-sm text-left text-gray-700">
-              <thead className="bg-gray-100 text-gray-600 text-xs uppercase tracking-wider">
-                <tr>
-                  <th className="px-4 py-3">Order ID</th>
-                  <th className="px-4 py-3">
-                    <User className="inline w-4 h-4 mr-1" />User
-                  </th>
-                  <th className="px-4 py-3">
-                    <Mail className="inline w-4 h-4 mr-1" />Email
-                  </th>
-                  <th className="px-4 py-3">
-                    <Phone className="inline w-4 h-4 mr-1" />Phone
-                  </th>
-                  <th className="px-4 py-3">
-                    <MapPin className="inline w-4 h-4 mr-1" />Address
-                  </th>
-                  <th className="px-4 py-3">
-                    <CreditCard className="inline w-4 h-4 mr-1" />Payment
-                  </th>
-                  <th className="px-4 py-3">
-                    <IndianRupee className="inline w-4 h-4 mr-1" />Total
-                  </th>
-                  <th className="px-4 py-3">
-                    <Clock className="inline w-4 h-4 mr-1" />Date
-                  </th>
-                  <th className="px-4 py-3">
-                    <Package className="inline w-4 h-4 mr-1" />Items
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.length === 0 ? (
-                  <tr>
-                    <td colSpan="9" className="text-center py-10 text-gray-500">
-                      No orders found.
-                    </td>
-                  </tr>
-                ) : (
-                  orders.map((order) => (
-                    <tr key={order.id} className="border-t hover:bg-gray-50">
-                      <td className="px-4 py-3 font-medium text-gray-800">
-                        #{order.id}
-                      </td>
-                      <td className="px-4 py-3">
-                        {order.firstName} {order.lastName}
-                      </td>
-                      <td className="px-4 py-3">{order.email}</td>
-                      <td className="px-4 py-3">{order.phone}</td>
-                      <td className="px-4 py-3 text-xs">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {orders.length === 0 ? (
+              <div className="col-span-full text-center text-gray-500">
+                No orders found.
+              </div>
+            ) : (
+              orders.map((order) => (
+                <div
+                  key={order.id}
+                  className="bg-white shadow-md rounded-lg p-5 border border-gray-200 hover:shadow-lg transition"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <h2 className="font-bold text-lg">Order #{order.id}</h2>
+                    <span className="text-sm text-gray-500">
+                      {new Date(order.createdAt).toLocaleString("en-IN")}
+                    </span>
+                  </div>
+
+                  <div className="space-y-2 text-sm text-gray-700">
+                    <p className="flex items-center gap-2">
+                      <User className="w-4 h-4 text-blue-500" />
+                      {order.firstName} {order.lastName}
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <Mail className="w-4 h-4 text-purple-500" />
+                      {order.email}
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <Phone className="w-4 h-4 text-green-500" />
+                      {order.phone}
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <MapPin className="w-4 h-4 text-red-500 mt-0.5" />
+                      <span>
                         {order.address}, {order.city}, {order.state} -{" "}
                         {order.pincode}
-                      </td>
-                      <td className="px-4 py-3">{order.paymentMethod}</td>
-                      <td className="px-4 py-3 font-semibold text-black">
-                        ₹{order.totalAmount}
-                      </td>
-                      <td className="px-4 py-3 text-sm text-gray-600">
-                        {new Date(order.createdAt).toLocaleString("en-IN")}
-                      </td>
-                      <td className="px-4 py-3">
-                        <ul className="list-disc ml-4 text-xs">
-                          {order.items.map((item) => (
-                            <li key={item.id}>
-                              {item.name} × {item.quantity}
-                            </li>
-                          ))}
-                        </ul>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+                      </span>
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <CreditCard className="w-4 h-4 text-yellow-500" />
+                      {order.paymentMethod}
+                    </p>
+                    <p className="flex items-center gap-2 font-semibold text-black">
+                      <IndianRupee className="w-4 h-4 text-green-600" />
+                      {order.totalAmount}
+                    </p>
+                  </div>
+
+                  <div className="mt-4">
+                    <p className="font-medium flex items-center gap-2">
+                      <Package className="w-4 h-4 text-pink-500" /> Items:
+                    </p>
+                    <ul className="list-disc ml-6 text-sm text-gray-600">
+                      {order.items.map((item) => (
+                        <li key={item.id}>
+                          {item.name} × {item.quantity}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         )}
 
@@ -208,7 +200,8 @@ export default function AdminDashboard() {
               <thead className="bg-gray-100 text-gray-600 text-xs uppercase tracking-wider">
                 <tr>
                   <th className="px-4 py-3">
-                    <Boxes className="inline w-4 h-4 mr-1" />Product
+                    <Boxes className="inline w-4 h-4 mr-1" />
+                    Product
                   </th>
                   <th className="px-4 py-3">Price</th>
                   <th className="px-4 py-3">Current Stock</th>

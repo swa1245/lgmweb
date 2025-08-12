@@ -1,9 +1,9 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import axios from "axios";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -16,17 +16,14 @@ export default function CheckoutPage() {
     city: "",
     state: "Maharashtra",
     pincode: "",
-    paymentMethod: "cod", //Updated default to "cod" (Cash on Delivery)
+    paymentMethod: "cod",
   });
 
   const [cart, setCart] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const cartTotal = cart.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const cartTotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const deliveryCharge = cartTotal > 10000 ? 0 : 400;
   const deliveryMessage =
     cartTotal > 10000
@@ -47,63 +44,122 @@ export default function CheckoutPage() {
     setFormData({ ...formData, [name]: value });
   };
 
+  // Razorpay script loader
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsSubmitting(true);
-  setErrors({});
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrors({});
 
-  const totalAmount = calculateTotalWithGST(cartTotal, deliveryCharge);
+    const totalAmount = cartTotal; // Send only the product total (₹1 in your case)
 
-  // Online Payment redirect
-  if (formData.paymentMethod === "razorpay") {
-    localStorage.setItem("checkoutData", JSON.stringify({
+
+    if (formData.paymentMethod === "razorpay") {
+      // Online Payment Flow
+      const loaded = await loadRazorpayScript();
+      if (!loaded) {
+        toast.error("Failed to load Razorpay SDK.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      try {
+        // Create Razorpay order from backend
+        const { data } = await axios.post("http://localhost:5000/api/payment/order", {
+          amount: totalAmount,
+        });
+
+        const options = {
+          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+          amount: data.amount,
+          currency: data.currency,
+          name: "Sports Store",
+          description: "Order Payment",
+          order_id: data.id,
+          handler: async (response) => {
+  try {
+    // Verify payment + save order in DB in one step
+    const verify = await axios.post("http://localhost:5000/api/payment/verify", {
+      razorpay_order_id: response.razorpay_order_id,
+      razorpay_payment_id: response.razorpay_payment_id,
+      razorpay_signature: response.razorpay_signature,
       formData,
       cart,
       totalAmount,
-    }));
-    router.push("/payment");
-    return;
-  }
-
-  try {
-    const response = await fetch("http://localhost:5000/api/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        formData,
-        cart,
-        totalAmount,
-      }),
     });
 
-    const data = await response.json();
-
-    if (data.success) {
+    if (verify.data.success) {
       localStorage.removeItem("cart");
-      toast.success("Order placed successfully!");
+      toast.success("Payment successful! Order placed.");
       router.push("/userProfile");
     } else {
-      toast.error("Failed to place order. Try again.");
+      toast.error("Payment verification failed.");
     }
   } catch (err) {
-    console.error("Order Error:", err);
-    toast.error("Something went wrong. Please try again.");
-  } finally {
-    setIsSubmitting(false);
+    console.error("Payment verification error", err);
+    toast.error("Payment verification error.");
   }
-};
+},
+          prefill: {
+            name: `${formData.firstName} ${formData.lastName}`,
+            email: formData.email,
+            contact: formData.phone,
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
 
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+      } catch (error) {
+        console.error("Payment initiation error", error);
+        toast.error("Error initiating Razorpay.");
+      } finally {
+        setIsSubmitting(false);
+      }
+      return;
+    }
 
+    // Cash on Delivery flow
+    try {
+      const response = await fetch("http://localhost:5000/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formData, cart, totalAmount }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        localStorage.removeItem("cart");
+        toast.success("Order placed successfully!");
+        router.push("/userProfile");
+      } else {
+        toast.error("Failed to place order. Try again.");
+      }
+    } catch (err) {
+      console.error("Order Error:", err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (cart.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center text-center bg-gradient-to-r from-orange-100 via-blue-100 to-white font-['Arimo']">
         <div>
-          <h2 className="text-2xl font-bold text-gray-700">
-            Your cart is empty
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-700">Your cart is empty</h2>
           <p className="text-gray-500 mb-4">Add items to checkout</p>
           <button
             onClick={() => router.push("/cart")}
@@ -115,6 +171,7 @@ export default function CheckoutPage() {
       </div>
     );
   }
+
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-orange-100 via-blue-100 to-white py-2 font-['Arimo'] pb-12">
@@ -283,16 +340,6 @@ export default function CheckoutPage() {
           </form>
 
 
-
-
-
-
-
-
-
-
-
-
           <div className="w-full lg:w-1/3">
             <div className="bg-white rounded-xl shadow p-6 sticky top-20">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
@@ -317,17 +364,21 @@ export default function CheckoutPage() {
               <div className="flex justify-between text-sm text-gray-700">
                 <span>Delivery Charges</span>
                 <span className={deliveryCharge === 0 ? "text-green-600" : ""}>
-                  ₹{deliveryCharge}
+                  ₹0
                 </span>
               </div>
               <p className="text-xs text-gray-500 mb-2">{deliveryMessage}</p>
               <div className="flex justify-between text-sm text-gray-700">
                 <span>GST (12%)</span>
-                <span>₹{calculateGST(cartTotal + deliveryCharge)}</span>
+                {/* <span>₹{calculateGST(cartTotal + deliveryCharge)}</span> */}
+                <span>₹0</span>
+
               </div>
               <div className="border-t mt-3 pt-3 flex justify-between text-lg font-semibold text-gray-900">
                 <span>Total</span>
-                <span>₹{calculateTotalWithGST(cartTotal, deliveryCharge)}</span>
+                {/* <span>₹{calculateTotalWithGST(cartTotal, deliveryCharge)}</span> */}
+                <span>₹{cartTotal}</span>
+
               </div>
               <p className="text-xs text-gray-500 mt-1">Including GST</p>
 
@@ -367,9 +418,6 @@ export default function CheckoutPage() {
               </div>
             </div>
           </div>
-
-
-
           
         </div>
       </div>
