@@ -195,7 +195,6 @@ const Hero = () => {
                     className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20 transition-all duration-700"></div>
-
                   <div className="relative z-10 flex flex-col items-center justify-center h-full text-white px-4 text-center">
                     <h2 className="text-3xl md:text-4xl font-bold mb-2 drop-shadow-lg">
                       {slide.category}

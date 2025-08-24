@@ -137,3 +137,6 @@ const RapidSkate4Wheel = () => {
 };
 
 export default RapidSkate4Wheel;
+
+
+

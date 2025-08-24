@@ -7,6 +7,8 @@ import { PrismaClient } from '@prisma/client';
 import authRoutes from './routes/authRoutes.js';
 import orderRoutes from "./routes/orderRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js"; 
+import productRoutes from "./routes/productRoutes.js";
+
 
 dotenv.config();
 
@@ -19,6 +21,8 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use("/api", orderRoutes);
 app.use("/api/payment", paymentRoutes); 
+app.use("/api/products", productRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 

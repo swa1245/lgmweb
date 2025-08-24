@@ -100,6 +100,7 @@ const CartPage = () => {
                       <button
                         onClick={() => decrementQuantity(item.id, item.type)}
                         className="px-3 py-1 text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+                        disabled={item.quantity <= 1} // prevent going below 1
                       >
                         -
                       </button>
@@ -108,7 +109,12 @@ const CartPage = () => {
                       </span>
                       <button
                         onClick={() => incrementQuantity(item.id, item.type)}
-                        className="px-3 py-1 text-gray-600 hover:text-gray-900 hover:bg-gray-100 relative group"
+                        disabled={item.quantity >= item.countInStock} // ✅ disable when stock limit reached
+                        className={`px-3 py-1 text-gray-600 hover:text-gray-900 hover:bg-gray-100 relative group ${
+                          item.quantity >= item.countInStock
+                            ? "opacity-50 cursor-not-allowed"
+                            : ""
+                        }`}
                       >
                         <span className="absolute inset-0 bg-orange-100 opacity-0 group-hover:opacity-30 transition-opacity"></span>
                         +

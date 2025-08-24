@@ -4,36 +4,51 @@ import prisma from "../lib/prismaClient.js";
 
 export const createOrder = async (req, res) => {
   try {
-    const { formData, cart, totalAmountPaise } = req.body;
+    const { formData, cart, totalAmount, totalAmountPaise } = req.body;
 
-    if (!formData || !cart || typeof totalAmountPaise !== "number") {
+    const finalAmount = typeof totalAmountPaise === "number" 
+      ? totalAmountPaise 
+      : totalAmount * 100;
+
+    if (!formData || !cart || !finalAmount) {
       return res.status(400).json({ success: false, message: "Missing order data" });
     }
 
-    const order = await prisma.order.create({
-      data: {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        address: formData.address,
-        city: formData.city,
-        state: formData.state,
-        pincode: formData.pincode,
-        paymentMethod: formData.paymentMethod,
-        totalAmount: totalAmountPaise, // store paise
-        paymentStatus: "pending",
-        items: {
-          create: cart.map((item) => ({
-            name: item.name,
-            quantity: item.quantity,
-            price: item.price, // price must be in paise
-          })),
+    // ✅ Start transaction: create order + update stock
+    const order = await prisma.$transaction(async (tx) => {
+      // 1. Create order
+      const newOrder = await tx.order.create({
+        data: {
+          ...formData,
+          totalAmount: finalAmount,
+          paymentStatus: "pending",
+          items: {
+            create: cart.map((item) => ({
+              name: item.name,
+              quantity: item.quantity,
+              price: item.price * 100,
+            })),
+          },
         },
-      },
+      });
+
+      // 2. Update stock for each product
+      for (const item of cart) {
+        await tx.product.update({
+          where: { id: item.id },
+          data: {
+            stockQuantity: {
+              decrement: item.quantity, // ✅ Reduce stock
+            },
+          },
+        });
+      }
+
+      return newOrder;
     });
 
     res.status(201).json({ success: true, order });
+
   } catch (err) {
     console.error("Order creation error:", err);
     res.status(500).json({ success: false, message: "Server Error" });

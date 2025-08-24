@@ -116,17 +116,16 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 // Your category data
 const categories = [
-  { name: "Inline Skates", link: "/inline-skates" },
+  { name: "Professional Inline Skates", link: "/inline-skates" },
   { name: "Twister Inline Skates", link: "/twister-inline-skates" },
   { name: "Roller/Quad Skates", link: "/quad-skates" },
   { name: "Hockey Skates", link: "/hockey-skates" },
   { name: "Workout Gear", link: "/workout-gear" },
   { name: "Wheels", link: "/wheels" },
   { name: "Bearings", link: "/bearings" },
-  { name: "SkinSuits", link: "/skinsuits" },
+  // { name: "SkinSuits", link: "/skinsuits" },
   { name: "Bags", link: "/bags" },
   { name: "GuardSet & Ezeefit", link: "/guardset-ezeefit" },
   { name: "Helmets", link: "/helmets" },
@@ -134,9 +133,8 @@ const categories = [
   { name: "Shoes & Frame", link: "/shoes-frame" },
   { name: "Baby & Tenacity Skate", link: "/baby-tenacity" },
   { name: "Hangers", link: "/hangers" },
-  { name: "Spacers-Axle-Adapter", link: "/spacers-axle-adapter" },
+  // { name: "Spacers-Axle-Adapter", link: "/spacers-axle-adapter" },
 ];
-
 export default function CategoryBar() {
   const pathname = usePathname();
   const [isMounted, setIsMounted] = React.useState(false);

@@ -90,9 +90,9 @@ export default function Navbar() {
             onClick={() => setMobileMenu(!mobileMenu)}
           />
 
-          <div className="hidden md:flex items-center gap-6 text-[15px] font-medium">
+          <div className="hidden md:flex items-center gap-2 text-[15px] font-medium">
             <Link href="/" className={navLinkClass("/")}>Home</Link>
-            <Link href="/inline-skates" className={navLinkClass("/inline-skates")}>Inline Skates</Link>
+            <Link href="/inline-skates" className={navLinkClass("/inline-skates")}>Professional Inline Skates</Link>
             <Link href="/quad-skates" className={navLinkClass("/quad-skates")}>Roller/Quad Skates</Link>
 
             {isAdmin && (
@@ -111,13 +111,13 @@ export default function Navbar() {
               </button>
               {showDropdown && (
                 <div className="absolute top-8 left-0 bg-white w-48 shadow-lg border rounded z-50">
-                  <Link href="/hockey-skates" className="block px-4 py-2 !text-black">Hockey Skates</Link>
                   <Link href="/workout-gear" className="block px-4 py-2 !text-black">Workout Gear</Link>
+                  <Link href="/sunglasses" className="block px-4 py-2 !text-black">Sunglasses</Link>
                 </div>
               )}
             </div>
 
-            <Link href="/hockey-skates" className={navLinkClass("/hockey-skates")}>Hockey Skates</Link>
+            {/* <Link href="/hockey-skates" className={navLinkClass("/hockey-skates")}>Hockey Skates</Link> */}
             <Link href="/workout-gear" className={navLinkClass("/workout-gear")}>Workout Gear</Link>
             <Link href="/Contact" className={navLinkClass("/Contact")}>Contact</Link>
           </div>
@@ -182,9 +182,9 @@ export default function Navbar() {
         <div className="md:hidden bg-white shadow-md px-6 py-4 space-y-2 text-sm font-medium text-gray-800">
           {[
             { href: "/", label: "Home" },
-            { href: "/inline-skates", label: "Inline Skates" },
+            { href: "/inline-skates", label: "Professional Inline Skates" },
             { href: "/quad-skates", label: "Roller/Quad Skates" },
-            { href: "/hockey-skates", label: "Hockey Skates" },
+            // { href: "/hockey-skates", label: "Hockey Skates" },
             { href: "/workout-gear", label: "Workout Gear" },
             { href: "/Contact", label: "Contact" },
             ...(isAdmin ? [{ href: "/admin-dashboard", label: "Admin Dashboard" }] : [])
