@@ -103,8 +103,38 @@ const adminLogin = async (req, res) => {
   }
 };
 
-// ✅ Export all three functions
-export { signup, login,  adminLogin };
+// =======================
+// ADMIN SIGNUP FUNCTION
+// =======================
+const adminSignup = async (req, res) => {
+  try {
+    const { adminId, password } = req.body;
+
+    const existingAdmin = await prisma.admin.findUnique({ where: { adminId } });
+
+    if (existingAdmin) {
+      return res.status(400).json({ message: 'Admin ID already exists' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const admin = await prisma.admin.create({
+      data: { adminId, password: hashedPassword },
+    });
+
+    const token = jwt.sign({ adminId: admin.id }, process.env.JWT_SECRET, {
+      expiresIn: '7d',
+    });
+
+    res.status(201).json({ message: 'Admin created successfully', admin, token });
+  } catch (error) {
+    console.error('Admin Signup error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// ✅ Export all four functions
+export { signup, login, adminLogin, adminSignup };
 
 
 

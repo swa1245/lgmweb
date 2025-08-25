@@ -34,14 +34,24 @@ export const createOrder = async (req, res) => {
 
       // 2. Update stock for each product
       for (const item of cart) {
-        await tx.product.update({
-          where: { id: item.id },
-          data: {
-            stockQuantity: {
-              decrement: item.quantity, // ✅ Reduce stock
-            },
-          },
+        // Find product by name instead of ID since frontend is using string IDs
+        // but database expects integer IDs
+        const product = await tx.product.findFirst({
+          where: { name: item.name }
         });
+        
+        if (product) {
+          await tx.product.update({
+            where: { id: product.id }, // Use the actual numeric ID from database
+            data: {
+              stockQuantity: {
+                decrement: item.quantity, // ✅ Reduce stock
+              },
+            },
+          });
+        } else {
+          console.warn(`Product not found: ${item.name}`);
+        }
       }
 
       return newOrder;
@@ -100,4 +110,29 @@ export const getAllOrders = async (req, res) => {
   }
 };
 
-
+export const updateOrderStatus = async (req, res) => {
+  try {
+    const { orderId, status } = req.body;
+    
+    if (!orderId || !status) {
+      return res.status(400).json({ success: false, message: "Order ID and status are required" });
+    }
+    
+    // Validate status
+    const validStatuses = ['processing', 'shipped', 'delivered'];
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ success: false, message: "Invalid status value" });
+    }
+    
+    // Update order status
+    const updatedOrder = await prisma.order.update({
+      where: { id: parseInt(orderId) },
+      data: { status },
+    });
+    
+    res.status(200).json({ success: true, order: updatedOrder });
+  } catch (err) {
+    console.error("Error updating order status:", err);
+    res.status(500).json({ success: false, message: "Error updating order status" });
+  }
+};
