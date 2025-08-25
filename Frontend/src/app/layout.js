@@ -91,7 +91,7 @@ export default function RootLayout({ children }) {
           <CategoryWrapper /> {/* Client logic here */}
           <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
           {children}
-          <footer className="pb-6">
+          <footer >
             <Footer />
           </footer>
           <div className="fixed bottom-6 right-16 bg-white text-gray-600 text-sm p-2 rounded-lg shadow-lg animate-bounce z-50">

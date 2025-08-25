@@ -38,7 +38,9 @@ export default function Hangers() {
 
   const handleBuyNow = (product) => {
     const { color = "", size = "" } = selections[product.id] || {};
+    // Add to cart in context but don't navigate to cart
     addToCart({ ...product, selectedColor: color, selectedSize: size });
+    // Go directly to checkout
     router.push("/checkout");
   };
 

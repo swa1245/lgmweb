@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FiSearch, FiShoppingCart, FiUser, FiBell } from "react-icons/fi"; // added FiBell
@@ -16,14 +17,33 @@ export default function Navbar() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const loginDropdownRef = useRef(null);
   const router = useRouter();
+  const { cart } = useCart();
 
-  useEffect(() => {
+  // Check login status on mount and when localStorage changes
+  const checkLoginStatus = () => {
     const admin = localStorage.getItem("admin");
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!admin || !!token);
     setIsAdmin(!!admin);
+  };
+
+  useEffect(() => {
+    // Initial check
+    checkLoginStatus();
+    
+    // Listen for storage events (when localStorage changes in other tabs)
+    window.addEventListener('storage', checkLoginStatus);
+    
+    // Listen for custom login/logout events
+    window.addEventListener('loginStatusChanged', checkLoginStatus);
+    
+    return () => {
+      window.removeEventListener('storage', checkLoginStatus);
+      window.removeEventListener('loginStatusChanged', checkLoginStatus);
+    };
   }, []);
 
   useEffect(() => {
@@ -35,15 +55,21 @@ export default function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  
+  // Update cart count when cart changes
+  useEffect(() => {
+    if (cart) {
+      const count = cart.reduce((total, item) => total + item.quantity, 0);
+      setCartCount(count);
+    }
+  }, [cart]);
 
   const handleProfileClick = () => {
     const admin = localStorage.getItem("admin");
     const token = localStorage.getItem("token");
 
-    if (admin) {
-      router.push("/adminProfile");
-    } else if (token) {
-      router.push("/userProfile");
+    if (admin || token) {
+      setShowLoginDropdown(!showLoginDropdown);
     } else {
       setShowLoginDropdown(true);
     }
@@ -135,8 +161,13 @@ export default function Navbar() {
           </div>
 
           <Link href="/cart">
-            <button className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100">
+            <button className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 relative">
               <FiShoppingCart className="text-gray-800 text-xl" strokeWidth={2.5} />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
             </button>
           </Link>
 
@@ -154,23 +185,122 @@ export default function Navbar() {
               className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 relative"
             >
               <FiUser className="text-gray-800 text-xl" strokeWidth={2.5} />
+              {isLoggedIn && (
+                <span className="absolute top-0 right-0 h-3 w-3 rounded-full bg-green-500 border border-white"></span>
+              )}
             </button>
 
-            {!isLoggedIn && showLoginDropdown && (
-              <div className="absolute right-0 mt-2 w-44 bg-white border rounded shadow-lg z-50 text-black">
-                <Link href="/admin-login" className="flex items-center gap-2 px-4 py-2 text-black font-semibold hover:bg-gray-100">
-                  <FaUserShield className="text-gray-600" />
-                  Admin Access
-                </Link>
-                <hr className="my-1" />
-                <Link href="/user-login" className="flex items-center gap-2 px-4 py-2 text-black font-semibold hover:bg-gray-100">
-                  <FaUserCircle className="text-gray-600" />
-                  User Login
-                </Link>
-                <Link href="/register" className="flex items-center gap-2 px-4 py-2 text-black font-semibold hover:bg-gray-100">
-                  <FaUserCircle className="text-gray-600" />
-                  User Sign Up
-                </Link>
+            {showLoginDropdown && (
+              <div className="absolute right-0 mt-3 w-56 bg-white border border-gray-200 rounded-lg shadow-xl z-50 text-black overflow-hidden transform transition-all duration-200 ease-in-out">
+                {!isLoggedIn ? (
+                  <>
+                    <div className="bg-gradient-to-r from-blue-50 to-blue-100 px-4 py-3 border-b border-gray-200">
+                      <p className="text-xs text-gray-500 mt-0.5">Sign in to access your account</p>
+                    </div>
+                    
+                    <div className="p-2">
+                      <Link href="/admin-login" className="flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-md hover:bg-blue-50 transition-colors duration-150 group">
+                        <div className="bg-blue-100 p-1.5 rounded-md group-hover:bg-blue-200 transition-colors duration-150">
+                          <FaUserShield className="text-blue-600" size={16} />
+                        </div>
+                        <div>
+                          <span className="block text-sm">Admin Access</span>
+                          <span className="text-xs text-gray-500">For store management</span>
+                        </div>
+                      </Link>
+                      
+                      <div className="border-t border-gray-100 my-2"></div>
+                      
+                      <Link href="/user-login" className="flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-md hover:bg-blue-50 transition-colors duration-150 group">
+                        <div className="bg-orange-100 p-1.5 rounded-md group-hover:bg-orange-200 transition-colors duration-150">
+                          <FaUserCircle className="text-orange-500" size={16} />
+                        </div>
+                        <span className="block text-sm">User Login</span>
+                      </Link>
+                      
+                      <Link href="/register" className="flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-md hover:bg-blue-50 transition-colors duration-150 group">
+                        <div className="bg-green-100 p-1.5 rounded-md group-hover:bg-green-200 transition-colors duration-150">
+                          <FaUserCircle className="text-green-500" size={16} />
+                        </div>
+                        <span className="block text-sm">User Sign Up</span>
+                      </Link>
+                    </div>
+                  </>
+                ) : isAdmin ? (
+                  <>
+                    <div className="bg-gradient-to-r from-blue-50 to-blue-100 px-4 py-3 border-b border-gray-200">
+                      <h3 className="text-sm font-bold text-gray-800">Admin Account</h3>
+                      <p className="text-xs text-gray-500 mt-0.5">Manage your store</p>
+                    </div>
+                    
+                    <div className="p-2">
+                      <Link href="/adminProfile" className="flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-md hover:bg-blue-50 transition-colors duration-150 group">
+                        <div className="bg-purple-100 p-1.5 rounded-md group-hover:bg-purple-200 transition-colors duration-150">
+                          <FaUserShield className="text-purple-600" size={16} />
+                        </div>
+                        <span className="block text-sm">Admin Profile</span>
+                      </Link>
+                      
+                      <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-md hover:bg-blue-50 transition-colors duration-150 group">
+                        <div className="bg-blue-100 p-1.5 rounded-md group-hover:bg-blue-200 transition-colors duration-150">
+                          <FaUserShield className="text-blue-600" size={16} />
+                        </div>
+                        <span className="block text-sm">Dashboard</span>
+                      </Link>
+                      
+                      <div className="border-t border-gray-100 my-2"></div>
+                      
+                      <button 
+                        onClick={() => {
+                          localStorage.removeItem("admin");
+                          window.dispatchEvent(new Event('loginStatusChanged'));
+                          router.push("/admin-login");
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-md hover:bg-red-50 transition-colors duration-150 group"
+                      >
+                        <div className="bg-red-100 p-1.5 rounded-md group-hover:bg-red-200 transition-colors duration-150">
+                          <FiUser className="text-red-500" size={16} />
+                        </div>
+                        <span className="block text-sm">Logout</span>
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="bg-gradient-to-r from-blue-50 to-blue-100 px-4 py-3 border-b border-gray-200">
+                      <h3 className="text-sm font-bold text-gray-800">Your Account</h3>
+                      <p className="text-xs text-gray-500 mt-0.5">Manage your profile</p>
+                    </div>
+                    
+                    <div className="p-2">
+                      <Link href="/userProfile" className="flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-md hover:bg-blue-50 transition-colors duration-150 group">
+                        <div className="bg-blue-100 p-1.5 rounded-md group-hover:bg-blue-200 transition-colors duration-150">
+                          <FaUserCircle className="text-blue-600" size={16} />
+                        </div>
+                        <span className="block text-sm">My Profile</span>
+                      </Link>
+                      
+                    
+                      
+                      <div className="border-t border-gray-100 my-2"></div>
+                      
+                      <button 
+                        onClick={() => {
+                          localStorage.removeItem("token");
+                          localStorage.removeItem("user");
+                          window.dispatchEvent(new Event('loginStatusChanged'));
+                          router.push("/user-login");
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-2.5 text-gray-700 font-medium rounded-md hover:bg-red-50 transition-colors duration-150 group"
+                      >
+                        <div className="bg-red-100 p-1.5 rounded-md group-hover:bg-red-200 transition-colors duration-150">
+                          <FiUser className="text-red-500" size={16} />
+                        </div>
+                        <span className="block text-sm">Logout</span>
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             )}
           </div>
