@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { FaArrowLeft } from "react-icons/fa";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";
 import API_CONFIG from "../../config/api";
 import { useCart } from "@/context/CartContext";
+import Script from "next/script";
+import Link from "next/link";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -242,7 +243,6 @@ export default function CheckoutPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen py-12">
-      <Toaster position="top-center" />
       <Script
         id="razorpay-checkout-js"
         src="https://checkout.razorpay.com/v1/checkout.js"
