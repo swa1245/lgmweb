@@ -22,3 +22,6 @@ cd backend
 npm install
 npm run dev
 ```
+
+Note: The backend server is located in `src/server.js` and will start automatically with the `npm run dev` command. Do not try to run `node server.js` directly from the backend root directory.
+```
