@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
+import API_CONFIG from "../../config/api";
 import { Package, User, Mail, Phone, Clock, CheckCircle, TruckIcon, AlertTriangle, ShoppingBag, LogOut, ChevronRight, Search, Calendar } from "lucide-react";
 
 export default function ProfilePage() {
@@ -32,7 +33,7 @@ export default function ProfilePage() {
     try {
       setLoadingOrders(true);
       const res = await fetch(
-        `http://localhost:5000/api/orders?email=${email}`
+        `${API_CONFIG.BASE_URL}/api/orders?email=${email}`
       );
       const data = await res.json();
       if (data.success) {

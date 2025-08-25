@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import API_CONFIG from "../../config/api";
 import {
   User,
   Mail,
@@ -46,7 +47,7 @@ export default function AdminDashboard() {
       setIsLoading(true);
       
       // Fetch orders
-      fetch("http://localhost:5000/api/admin/orders")
+      fetch(`${API_CONFIG.BASE_URL}/api/admin/orders`)
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
@@ -66,7 +67,7 @@ export default function AdminDashboard() {
         });
 
       // Fetch student discount applications
-      axios.get("http://localhost:5000/api/student-discounts")
+      axios.get(`${API_CONFIG.BASE_URL}/api/student-discounts`)
         .then(response => {
           if (response.data.success) {
             setStudentDiscounts(response.data.data);
@@ -101,7 +102,7 @@ export default function AdminDashboard() {
     const { orderId, status: newStatus } = confirmModal;
     setIsUpdating(true);
     try {
-      const response = await axios.put('http://localhost:5000/api/admin/orders/status', {
+      const response = await axios.put(`${API_CONFIG.BASE_URL}/api/admin/orders/status`, {
         orderId,
         status: newStatus
       });

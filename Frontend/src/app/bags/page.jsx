@@ -389,30 +389,30 @@ import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 
 // Images
-import smallQuadBag1 from "/public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-33.jpg";
-import smallQuadBag2 from "/public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-34.jpg";
-import smallQuadBag3 from "/public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-35.jpg";
-import smallQuadBag4 from "/public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-36.jpg";
-import smallQuadBag5 from "/public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-36.jpg";
-import smallQuadBag6 from "/public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-37.jpg";
-import smallQuadBag7 from "/public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-39.jpg";
-import smallQuadBag8 from "/public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-40.jpg";
-import smallQuadBag9 from "/public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-41.jpg";
+import smallQuadBag1 from "../../../public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-33.jpg";
+import smallQuadBag2 from "../../../public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-34.jpg";
+import smallQuadBag3 from "../../../public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-35.jpg";
+import smallQuadBag4 from "../../../public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-36.jpg";
+import smallQuadBag5 from "../../../public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-36.jpg";
+import smallQuadBag6 from "../../../public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-37.jpg";
+import smallQuadBag7 from "../../../public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-39.jpg";
+import smallQuadBag8 from "../../../public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-40.jpg";
+import smallQuadBag9 from "../../../public/assets/101- Small Quad Bag-20250814T104425Z-1-001/101- Small Quad Bag/AARMS Photography-41.jpg";
 
-import hqQuadBag1 from "/public/assets/102- HQ Quad Bag-20250814T104431Z-1-001/102- HQ Quad Bag/AARMS Photography-164.jpg";
-import hqQuadBag2 from "/public/assets/102- HQ Quad Bag-20250814T104431Z-1-001/102- HQ Quad Bag/AARMS Photography-165.jpg";
-import hqQuadBag3 from "/public/assets/102- HQ Quad Bag-20250814T104431Z-1-001/102- HQ Quad Bag/AARMS Photography-166.jpg";
+import hqQuadBag1 from "../../../public/assets/102- HQ Quad Bag-20250814T104431Z-1-001/102- HQ Quad Bag/AARMS Photography-164.jpg";
+import hqQuadBag2 from "../../../public/assets/102- HQ Quad Bag-20250814T104431Z-1-001/102- HQ Quad Bag/AARMS Photography-165.jpg";
+import hqQuadBag3 from "../../../public/assets/102- HQ Quad Bag-20250814T104431Z-1-001/102- HQ Quad Bag/AARMS Photography-166.jpg";
 
-import inlineBag1 from "/public/assets/103 - Inline Bag-20250814T104437Z-1-001/103 - Inline Bag/AARMS Photography-3.jpg";
-import inlineBag2 from "/public/assets/103 - Inline Bag-20250814T104437Z-1-001/103 - Inline Bag/AARMS Photography-4.jpg";
-import inlineBag3 from "/public/assets/103 - Inline Bag-20250814T104437Z-1-001/103 - Inline Bag/AARMS Photography-5.jpg";
-import inlineBag4 from "/public/assets/103 - Inline Bag-20250814T104437Z-1-001/103 - Inline Bag/AARMS Photography-174.jpg";
-import inlineBag5 from "/public/assets/103 - Inline Bag-20250814T104437Z-1-001/103 - Inline Bag/AARMS Photography-175.jpg";
-import inlineBag6 from "/public/assets/103 - Inline Bag-20250814T104437Z-1-001/103 - Inline Bag/AARMS Photography-176.jpg";
+import inlineBag1 from "../../../public/assets/103 - Inline Bag-20250814T104437Z-1-001/103 - Inline Bag/AARMS Photography-3.jpg";
+import inlineBag2 from "../../../public/assets/103 - Inline Bag-20250814T104437Z-1-001/103 - Inline Bag/AARMS Photography-4.jpg";
+import inlineBag3 from "../../../public/assets/103 - Inline Bag-20250814T104437Z-1-001/103 - Inline Bag/AARMS Photography-5.jpg";
+import inlineBag4 from "../../../public/assets/103 - Inline Bag-20250814T104437Z-1-001/103 - Inline Bag/AARMS Photography-174.jpg";
+import inlineBag5 from "../../../public/assets/103 - Inline Bag-20250814T104437Z-1-001/103 - Inline Bag/AARMS Photography-175.jpg";
+import inlineBag6 from "../../../public/assets/103 - Inline Bag-20250814T104437Z-1-001/103 - Inline Bag/AARMS Photography-176.jpg";
 
-import proInlineBag1 from "/public/assets/105- Pro Inline Bag-20250814T104442Z-1-001/105- Pro Inline Bag/AARMS Photography-6.jpg";
-import proInlineBag2 from "/public/assets/105- Pro Inline Bag-20250814T104442Z-1-001/105- Pro Inline Bag/AARMS Photography-7.jpg";
-import proInlineBag3 from "/public/assets/105- Pro Inline Bag-20250814T104442Z-1-001/105- Pro Inline Bag/AARMS Photography-8.jpg";
+import proInlineBag1 from "../../../public/assets/105- Pro Inline Bag-20250814T104442Z-1-001/105- Pro Inline Bag/AARMS Photography-6.jpg";
+import proInlineBag2 from "../../../public/assets/105- Pro Inline Bag-20250814T104442Z-1-001/105- Pro Inline Bag/AARMS Photography-7.jpg";
+import proInlineBag3 from "../../../public/assets/105- Pro Inline Bag-20250814T104442Z-1-001/105- Pro Inline Bag/AARMS Photography-8.jpg";
 
 
 export default function Hangers() {

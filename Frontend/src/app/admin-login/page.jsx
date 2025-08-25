@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import { Lock, ShieldCheck, User, Eye, EyeOff } from "lucide-react";
+import API_CONFIG from "../../config/api";
 
 
 export default function AdminLogin() {
@@ -22,7 +23,7 @@ export default function AdminLogin() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/admin/login", {
+      const res = await fetch(`${API_CONFIG.BASE_URL}/api/auth/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import toast, { Toaster } from "react-hot-toast";
-import Script from "next/script";
-import Link from "next/link";
 import axios from "axios";
+import { FaArrowLeft } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import API_CONFIG from "../../config/api";
 import { useCart } from "@/context/CartContext";
 
 export default function CheckoutPage() {
@@ -73,7 +74,7 @@ export default function CheckoutPage() {
       try {
         // Save student discount information to backend
         const response = await axios.post(
-          "http://localhost:5000/api/student-discounts",
+          `${API_CONFIG.BASE_URL}/api/student-discounts`,
           couponData
         );
         
@@ -126,7 +127,7 @@ export default function CheckoutPage() {
       try {
         // Create Razorpay order
         const { data } = await axios.post(
-          "http://localhost:5000/api/payment/order",
+          `${API_CONFIG.BASE_URL}/api/payment/order`,
           {
             amount: totalAmount,
           }
@@ -143,7 +144,7 @@ export default function CheckoutPage() {
             try {
               // Verify + save order
               const verify = await axios.post(
-                "http://localhost:5000/api/payment/verify",
+                `${API_CONFIG.BASE_URL}/api/payment/verify`,
                 {
                   razorpay_order_id: response.razorpay_order_id,
                   razorpay_payment_id: response.razorpay_payment_id,
@@ -191,7 +192,7 @@ export default function CheckoutPage() {
 
     // Cash on Delivery
     try {
-      const response = await fetch("http://localhost:5000/api/orders", {
+      const response = await fetch(`${API_CONFIG.BASE_URL}/api/orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

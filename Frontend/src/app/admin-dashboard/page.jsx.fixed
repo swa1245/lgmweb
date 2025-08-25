@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import API_CONFIG from "@/config/api.js";
 import {
   User,
   Mail,
@@ -38,7 +39,7 @@ export default function AdminDashboard() {
       setIsLoading(true);
       
       // Fetch orders
-      fetch("http://localhost:5000/api/admin/orders")
+      fetch(`${API_CONFIG.BASE_URL}/api/admin/orders`)
         .then((res) => res.json())
         .then((data) => {
           if (data.success) setOrders(data.orders);
@@ -51,7 +52,7 @@ export default function AdminDashboard() {
         });
 
       // Fetch student discount applications
-      axios.get("http://localhost:5000/api/student-discounts")
+      axios.get(`${API_CONFIG.BASE_URL}/api/student-discounts`)
         .then(response => {
           if (response.data.success) {
             setStudentDiscounts(response.data.data);

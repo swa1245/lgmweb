@@ -5,43 +5,43 @@ import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 
 // Images
-import quadInlineBearing1 from "/public/assets/91 - 627-608 Quad & Inline Bearing (16 pcs)/Photo from Rucha Lembhe (3).jpg";
-import quadInlineBearing2 from "/public/assets/91 - 627-608 Quad & Inline Bearing (16 pcs)/Photo from Rucha Lembhe (4).jpg";
+import quadInlineBearing1 from "../../../public/assets/91 - 627-608 Quad & Inline Bearing (16 pcs)/Photo from Rucha Lembhe (3).jpg";
+import quadInlineBearing2 from "../../../public/assets/91 - 627-608 Quad & Inline Bearing (16 pcs)/Photo from Rucha Lembhe (4).jpg";
 
 
-import ABEC7bearing1 from "/public/assets/92- 608 ABEC7 Bearing (16pcs)/1.jpg";
-import ABEC7bearing2 from "/public/assets/92- 608 ABEC7 Bearing (16pcs)/2.jpg";
-import ABEC7bearing3 from "/public/assets/92- 608 ABEC7 Bearing (16pcs)/3.jpg";
+import ABEC7bearing1 from "../../../public/assets/92- 608 ABEC7 Bearing (16pcs)/1.jpg";
+import ABEC7bearing2 from "../../../public/assets/92- 608 ABEC7 Bearing (16pcs)/2.jpg";
+import ABEC7bearing3 from "../../../public/assets/92- 608 ABEC7 Bearing (16pcs)/3.jpg";
 
-// import quadInlinepraBearing1 from "/public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-34.jpg";
-// import quadInlinepraBearing2 from "/public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-35.jpg";
-// import quadInlinepraBearing3 from "/public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-36.jpg";
-// import quadInlinepraBearing4 from "/public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-37.jpg";
-
-
-import quadInlinepraBearing1 from "/public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-35.jpg";
-import quadInlinepraBearing2 from "/public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-35.jpg";
-import quadInlinepraBearing3 from "/public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-35.jpg";
-import quadInlinepraBearing4 from "/public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-35.jpg";
+// import quadInlinepraBearing1 from "../../../public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-34.jpg";
+// import quadInlinepraBearing2 from "../../../public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-35.jpg";
+// import quadInlinepraBearing3 from "../../../public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-36.jpg";
+// import quadInlinepraBearing4 from "../../../public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-37.jpg";
 
 
-import swissgold1 from "/public/assets/94 - 627 - 608 Swiss Gold ( 7 Ball ) (16pcs)/AARMS Photography-38.jpg";
-import swissgold2 from "/public/assets/94 - 627 - 608 Swiss Gold ( 7 Ball ) (16pcs)/AARMS Photography-39.jpg";
-
-import hybridAntirustWhiteBall1 from "/public/assets/95- 627 -608 Hybrid Antirust White Ball Ceramic Bearing (16pcs)/1.jpg";
-import hybridAntirustWhiteBall2 from "/public/assets/95- 627 -608 Hybrid Antirust White Ball Ceramic Bearing (16pcs)/(2).jpg";
-
-
-import whiteCeramicBearing1 from "/public/assets/96 - 608 White Ceramic  Bearing (16pcs)/AARMS Photography-29.jpg";
-import whiteCeramicBearing2 from "/public/assets/96 - 608 White Ceramic  Bearing (16pcs)/AARMS Photography-30.jpg";
+import quadInlinepraBearing1 from "../../../public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-35.jpg";
+import quadInlinepraBearing2 from "../../../public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-35.jpg";
+import quadInlinepraBearing3 from "../../../public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-35.jpg";
+import quadInlinepraBearing4 from "../../../public/assets/93- 627 - 608 Quad & Inline Practice Bearing (16 pcs)/AARMS Photography-35.jpg";
 
 
-import minimizerBearing1 from "/public/assets/97- 608 Minimizer Bearing ( 11 Ball ) (16pcs)/1.jpg";
-import minimizerBearing2 from "/public/assets/97- 608 Minimizer Bearing ( 11 Ball ) (16pcs)/2.jpg";
+import swissgold1 from "../../../public/assets/94 - 627 - 608 Swiss Gold ( 7 Ball ) (16pcs)/AARMS Photography-38.jpg";
+import swissgold2 from "../../../public/assets/94 - 627 - 608 Swiss Gold ( 7 Ball ) (16pcs)/AARMS Photography-39.jpg";
+
+import hybridAntirustWhiteBall1 from "../../../public/assets/95- 627 -608 Hybrid Antirust White Ball Ceramic Bearing (16pcs)/1.jpg";
+import hybridAntirustWhiteBall2 from "../../../public/assets/95- 627 -608 Hybrid Antirust White Ball Ceramic Bearing (16pcs)/(2).jpg";
 
 
-import overlapBearing1 from "/public/assets/98 - 608 Overlap Bearing ( 11 Ball ) (16pcs)/AARMS Photography-40.jpg";
-import overlapBearing2 from "/public/assets/98 - 608 Overlap Bearing ( 11 Ball ) (16pcs)/AARMS Photography-41.jpg";
+import whiteCeramicBearing1 from "../../../public/assets/96 - 608 White Ceramic  Bearing (16pcs)/AARMS Photography-29.jpg";
+import whiteCeramicBearing2 from "../../../public/assets/96 - 608 White Ceramic  Bearing (16pcs)/AARMS Photography-30.jpg";
+
+
+import minimizerBearing1 from "../../../public/assets/97- 608 Minimizer Bearing ( 11 Ball ) (16pcs)/1.jpg";
+import minimizerBearing2 from "../../../public/assets/97- 608 Minimizer Bearing ( 11 Ball ) (16pcs)/2.jpg";
+
+
+import overlapBearing1 from "../../../public/assets/98 - 608 Overlap Bearing ( 11 Ball ) (16pcs)/AARMS Photography-40.jpg";
+import overlapBearing2 from "../../../public/assets/98 - 608 Overlap Bearing ( 11 Ball ) (16pcs)/AARMS Photography-41.jpg";
 
 
 

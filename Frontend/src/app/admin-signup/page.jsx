@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
+import API_CONFIG from "../../config/api";
 import { Lock, ShieldCheck, User, Eye, EyeOff, CheckCircle, XCircle } from "lucide-react";
 
 export default function AdminSignup() {
@@ -64,7 +65,7 @@ export default function AdminSignup() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/admin/signup", {
+      const res = await fetch(`${API_CONFIG.BASE_URL}/api/auth/admin/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

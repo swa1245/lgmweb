@@ -7,6 +7,7 @@ import { UserPlus, Mail, Phone, Lock, User, ArrowRight, CheckCircle } from "luci
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import API_CONFIG from "../../config/api";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -94,7 +95,7 @@ export default function RegisterPage() {
       return;
     }
 
-    const signupPromise = fetch("http://localhost:5000/api/auth/signup", {
+    const signupPromise = fetch(`${API_CONFIG.BASE_URL}/api/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

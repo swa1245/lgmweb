@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import { Inter, Poppins } from 'next/font/google';
+import API_CONFIG from "../../config/api";
 
 // Initialize the fonts
 const inter = Inter({ 
@@ -34,7 +35,7 @@ export default function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const loginPromise = fetch("http://localhost:5000/api/auth/login", {
+    const loginPromise = fetch(`${API_CONFIG.BASE_URL}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

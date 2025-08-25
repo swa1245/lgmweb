@@ -7,21 +7,21 @@ import Image from "next/image";
 
 
 // Images
-import raptor1001 from "/public/assets/50- 3 X100 Raptor/AARMS Photography-9.jpg";
-import raptor1002 from "/public/assets/50- 3 X100 Raptor/AARMS Photography-10.jpg";
-import raptor1003 from "/public/assets/50- 3 X100 Raptor/AARMS Photography-11.jpg";
-import raptor1004 from "/public/assets/50- 3 X100 Raptor/AARMS Photography-12.jpg";
+import raptor1001 from "../../../public/assets/50- 3 X100 Raptor/AARMS Photography-9.jpg";
+import raptor1002 from "../../../public/assets/50- 3 X100 Raptor/AARMS Photography-10.jpg";
+import raptor1003 from "../../../public/assets/50- 3 X100 Raptor/AARMS Photography-11.jpg";
+import raptor1004 from "../../../public/assets/50- 3 X100 Raptor/AARMS Photography-12.jpg";
 
-import raptor901 from "/public/assets/49-3 X 90 Raptor/AARMS Photography-1.jpg";
-import raptor902 from "/public/assets/49-3 X 90 Raptor/AARMS Photography-2.jpg";
-import raptor903 from "/public/assets/49-3 X 90 Raptor/AARMS Photography-3.jpg";
-import raptor904 from "/public/assets/49-3 X 90 Raptor/AARMS Photography-4.jpg";
+import raptor901 from "../../../public/assets/49-3 X 90 Raptor/AARMS Photography-1.jpg";
+import raptor902 from "../../../public/assets/49-3 X 90 Raptor/AARMS Photography-2.jpg";
+import raptor903 from "../../../public/assets/49-3 X 90 Raptor/AARMS Photography-3.jpg";
+import raptor904 from "../../../public/assets/49-3 X 90 Raptor/AARMS Photography-4.jpg";
 
 
-import raptor1101 from "/public/assets/51- 3 X 110 Raptor/AARMS Photography-5.jpg";
-import raptor1102 from "/public/assets/51- 3 X 110 Raptor/AARMS Photography-6.jpg";
-import raptor1103 from "/public/assets/51- 3 X 110 Raptor/AARMS Photography-7.jpg";
-import raptor1104 from "/public/assets/51- 3 X 110 Raptor/AARMS Photography-8.jpg";
+import raptor1101 from "../../../public/assets/51- 3 x 110 Raptor/AARMS Photography-5.jpg";
+import raptor1102 from "../../../public/assets/51- 3 x 110 Raptor/AARMS Photography-6.jpg";
+import raptor1103 from "../../../public/assets/51- 3 x 110 Raptor/AARMS Photography-7.jpg";
+import raptor1104 from "../../../public/assets/51- 3 x 110 Raptor/AARMS Photography-8.jpg";
 
 
 
