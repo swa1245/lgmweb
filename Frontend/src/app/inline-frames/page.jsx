@@ -5,11 +5,8 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 
-
-// Images
-import flash1 from "/public/assets/65-3X110= Flash 11.25/AARMS Photography-50.jpg";
-import flash2 from "/public/assets/65-3X110= Flash 11.25/AARMS Photography-51.jpg";
-
+// Placeholder image URL
+const placeholderImage = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2YwZjBmMCIgLz4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5JbWFnZSBDb21pbmcgU29vbjwvdGV4dD4KPC9zdmc+";
 
 export default function Hangers() {
   const [view, setView] = useState("grid");
@@ -75,8 +72,8 @@ const products = [
     id: "A0025-viper-package-bag",
     name: "Viper Package + Bag",
     price: 9520,
-    image: img1,
-    images: [img1, img2],
+    image: placeholderImage,
+    images: [placeholderImage, placeholderImage],
     countInStock: 15,
     description:
       "Complete Viper skating package with a matching carry bag for easy transport.",
@@ -85,14 +82,16 @@ const products = [
       wheelSetup: "4 Wheel",
       frame: "Aluminium",
     },
+    colors: ["Black", "Blue", "Red"],
+    sizes: ["36", "37", "38", "39", "40", "41", "42"]
   },
   
   {
     id: "A0026-omen-package-bag",
     name: "Omen Package + Bag",
     price: 11200,
-    image: img1,
-    images: [img1, img2],
+    image: placeholderImage,
+    images: [placeholderImage, placeholderImage],
     countInStock: 15,
     description:
       "High-performance Omen skating package with bag included for convenience.",
@@ -101,14 +100,16 @@ const products = [
       wheelSetup: "4 Wheel",
       frame: "Aluminium",
     },
+    colors: ["Black", "White", "Red"],
+    sizes: ["36", "37", "38", "39", "40", "41", "42"]
   },
   
   {
     id: "A0027-yoru-package-bag",
     name: "Yoru Package + Bag",
     price: 12880,
-    image: img1,
-    images: [img1, img2],
+    image: placeholderImage,
+    images: [placeholderImage, placeholderImage],
     countInStock: 15,
     description:
       "Yoru skating package designed for speed and comfort, complete with bag.",
@@ -117,14 +118,16 @@ const products = [
       wheelSetup: "4 Wheel",
       frame: "Aluminium",
     },
+    colors: ["Black", "Blue", "Pink"],
+    sizes: ["36", "37", "38", "39", "40", "41", "42"]
   },
   
   {
     id: "A0028-hq-viper-package-bag",
     name: "HQ Shoes Aluminium VIPER Package + HQ Bag",
     price: 14224,
-    image: img1,
-    images: [img1, img2],
+    image: placeholderImage,
+    images: [placeholderImage, placeholderImage],
     countInStock: 15,
     description:
       "Premium HQ Shoes with Aluminium Viper frame package, comes with HQ branded bag.",
@@ -133,14 +136,16 @@ const products = [
       wheelSetup: "4 Wheel",
       frame: "Aluminium",
     },
+    colors: ["Black", "White", "Red"],
+    sizes: ["36", "37", "38", "39", "40", "41", "42"]
   },
   
   {
     id: "A0029-nivia-omen-package-bag",
     name: "NIVIA Aluminium OMEN Package + HQ Bag",
     price: 15568,
-    image: img1,
-    images: [img1, img2],
+    image: placeholderImage,
+    images: [placeholderImage, placeholderImage],
     countInStock: 15,
     description:
       "NIVIA Aluminium Omen package paired with HQ branded bag for durability and style.",
@@ -149,6 +154,8 @@ const products = [
       wheelSetup: "4 Wheel",
       frame: "Aluminium",
     },
+    colors: ["Black", "Blue", "Pink"],
+    sizes: ["36", "37", "38", "39", "40", "41", "42"]
   },
   
 ];

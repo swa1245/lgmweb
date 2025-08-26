@@ -6,6 +6,7 @@ import { useCart } from "@/context/CartContext";
 import toast from "react-hot-toast";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaTruck, FaShieldAlt, FaArrowLeft } from "react-icons/fa";
+import Image from "next/image";
 
 const HQQuadPackagePage = () => {
   const [view, setView] = useState("grid");
@@ -67,33 +68,59 @@ const HQQuadPackagePage = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedProduct]);
 
+  // Placeholder image URL
+  const placeholderImage = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2YwZjBmMCIgLz4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5JbWFnZSBDb21pbmcgU29vbjwvdGV4dD4KPC9zdmc+";
+
   // Product details
-  const products = {
-    id: "hq-quad-package",
-    name: "HQ Quad Package",
-    price: 18000,
-    description: "Premium quad skate package with high-quality components for advanced skaters",
-    image: "/assets/quad-skates/hq-package.jpg", // Replace with actual image path
-    features: [
-      "Professional-grade quad skates for advanced performance",
-      "CNC machined aluminum frame for maximum durability",
-      "Premium leather boot with enhanced ankle support",
-      "ABEC-9 precision bearings for superior speed and smoothness",
-      "High-rebound polyurethane wheels for optimal grip and roll",
-      "Adjustable toe stop for precise control",
-      "Includes deluxe protective gear set and carrying bag"
-    ],
-    specifications: {
-      "Boot Material": "Genuine leather with memory foam padding",
-      "Frame": "CNC machined aluminum alloy",
-      "Wheels": "62mm/92A hardness high-rebound polyurethane",
-      "Bearings": "ABEC-9 precision",
-      "Closure": "Laces with ankle strap and metal buckle",
-      "Weight": "Approximately 1.4kg per skate",
-      "Recommended For": "Intermediate to advanced skaters",
-      "Package Includes": "Pair of premium quad skates, deluxe protective gear set, carrying bag"
+  const products = [
+    {
+      id: "hq-quad-package-pro",
+      name: "HQ Quad Package Pro",
+      price: 18000,
+      description: "Premium quad skate package with high-quality components for advanced skaters",
+      image: placeholderImage,
+      images: [placeholderImage, placeholderImage],
+      countInStock: 15,
+      features: [
+        "Professional-grade quad skates for advanced performance",
+        "CNC machined aluminum frame for maximum durability",
+        "Premium leather boot with enhanced ankle support",
+        "ABEC-9 precision bearings for superior speed and smoothness",
+        "High-rebound polyurethane wheels for optimal grip and roll"
+      ],
+      specs: {
+        usage: "Advanced",
+        wheels: "62mm/92A hardness",
+        material: "Genuine leather",
+        bearings: "ABEC-9"
+      },
+      colors: ["Black", "White", "Red"],
+      sizes: ["36", "37", "38", "39", "40", "41", "42"]
+    },
+    {
+      id: "hq-quad-package-standard",
+      name: "HQ Quad Package Standard",
+      price: 15000,
+      description: "Standard quad skate package with quality components for intermediate skaters",
+      image: placeholderImage,
+      images: [placeholderImage, placeholderImage],
+      countInStock: 20,
+      features: [
+        "Quality quad skates for intermediate performance",
+        "Aluminum frame for durability",
+        "Synthetic leather boot with good ankle support",
+        "ABEC-7 bearings for smooth skating"
+      ],
+      specs: {
+        usage: "Intermediate",
+        wheels: "60mm/88A hardness",
+        material: "Synthetic leather",
+        bearings: "ABEC-7"
+      },
+      colors: ["Black", "Blue", "Pink"],
+      sizes: ["36", "37", "38", "39", "40", "41", "42"]
     }
-  };
+  ];
 
   
   if (loading) {
@@ -176,15 +203,21 @@ const HQQuadPackagePage = () => {
                      }`}
                    >
                      <div className="relative w-full h-64">
-                       <Image
-                         src={product.image}
-                         alt={product.name}
-                         fill
-                         className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
-                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                         priority
-                       />
-                     </div>
+                      {product.image ? (
+                        <Image
+                          src={product.image}
+                          alt={product.name}
+                          fill
+                          className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          priority
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 font-medium text-center p-4">
+                          Image Coming Soon
+                        </div>
+                      )}
+                    </div>
    
                      {/* ✅ Stock Badge */}
                      <span
@@ -442,15 +475,21 @@ const HQQuadPackagePage = () => {
                )}
    
                <div className="relative w-full h-[80vh]">
-                 <Image
-                   src={selectedProduct.images[currentImageIndex]}
-                   alt={selectedProduct.name}
-                   fill
-                   className="object-contain rounded-lg"
-                   sizes="100vw"
-                   priority
-                 />
-               </div>
+                {selectedProduct.images && selectedProduct.images[currentImageIndex] ? (
+                  <Image
+                    src={selectedProduct.images[currentImageIndex]}
+                    alt={selectedProduct.name}
+                    fill
+                    className="object-contain rounded-lg"
+                    sizes="100vw"
+                    priority
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 font-medium text-center p-4 rounded-lg">
+                    Image Coming Soon
+                  </div>
+                )}
+              </div>
              </div>
            </div>
          )}
