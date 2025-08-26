@@ -6,47 +6,82 @@ import { useCart } from "@/context/CartContext";
 import toast from "react-hot-toast";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaTruck, FaShieldAlt, FaArrowLeft } from "react-icons/fa";
+import { BsGrid, BsListUl } from "react-icons/bs";
+import { IoMdClose } from "react-icons/io";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import Image from "next/image";
+
+// Placeholder image URL
+const placeholderImage = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2YwZjBmMCIgLz4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5JbWFnZSBDb21pbmcgU29vbjwvdGV4dD4KPC9zdmc+";
 
 const QuadFramePage = () => {
   const router = useRouter();
   const { addToCart } = useCart();
-  const [isInStock, setIsInStock] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const [view, setView] = useState("grid");
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [selections, setSelections] = useState({});
 
-  // Product details
-  const product = {
-    id: "quad-frame",
-    name: "Quad Frame",
-    price: 6000,
-    description: "Durable aluminum quad frames for optimal performance",
-    image: "/assets/quad-skates/frame.jpg", // Replace with actual image path
-    features: [
-      "CNC machined aircraft-grade aluminum construction",
-      "Lightweight yet extremely durable design",
-      "Precision wheel alignment for optimal stability",
-      "Compatible with standard mounting systems",
-      "Adjustable wheelbase for customized performance",
-      "Low center of gravity for enhanced control",
-      "Available in multiple colors"
-    ],
-    specifications: {
-      "Material": "Aircraft-grade aluminum alloy",
-      "Weight": "Approximately 280g per frame",
-      "Wheelbase": "Adjustable 96-106mm",
-      "Wheel Size Compatibility": "58-62mm",
-      "Mounting": "Standard 165mm mounting system",
-      "Colors Available": "Black, Silver, Gold, Blue",
-      "Recommended For": "All skill levels",
-      "Includes": "Pair of frames, mounting hardware"
+  // Products array
+  const products = [
+    {
+      id: "quad-frame-pro",
+      name: "Quad Frame Pro",
+      price: 6000,
+      description: "Durable aluminum quad frames for optimal performance",
+      image: placeholderImage,
+      images: [placeholderImage, placeholderImage],
+      countInStock: 15,
+      features: [
+        "CNC machined aircraft-grade aluminum construction",
+        "Lightweight yet extremely durable design",
+        "Precision wheel alignment for optimal stability",
+        "Compatible with standard mounting systems",
+        "Adjustable wheelbase for customized performance",
+        "Low center of gravity for enhanced control",
+        "Available in multiple colors"
+      ],
+      specs: {
+        material: "Aircraft-grade aluminum",
+        weight: "280g",
+        wheelbase: "Adjustable 90-110mm",
+        compatibility: "Standard mounting systems",
+        warranty: "1 year",
+        recommendedFor: "All skill levels",
+        includes: "Pair of frames, mounting hardware"
+      },
+      colors: ["Black", "Silver", "Red", "Blue"],
+      sizes: ["Small", "Medium", "Large"],
+      stock: {
+        "Black-Small": 5,
+        "Black-Medium": 3,
+        "Black-Large": 2,
+        "Silver-Small": 4,
+        "Silver-Medium": 3,
+        "Silver-Large": 2,
+        "Red-Small": 3,
+        "Red-Medium": 2,
+        "Red-Large": 1,
+        "Blue-Small": 4,
+        "Blue-Medium": 3,
+        "Blue-Large": 2
+      }
     }
-  };
+  ];
 
   useEffect(() => {
-    // Check if product is in stock (from localStorage or could be from API)
-    const stockStatus = JSON.parse(localStorage.getItem("lgmStockStatus") || "{}");
-    setIsInStock(stockStatus[product.id] !== false);
-    setLoading(false);
+    // Initialize selections for each product
+    const initialSelections = {};
+    products.forEach((product) => {
+      initialSelections[product.id] = {
+        color: product.colors[0],
+        size: product.sizes[0],
+      };
+    });
+    setSelections(initialSelections);
   }, []);
+
 
   const handleAddToCart = () => {
     if (!isInStock) return;

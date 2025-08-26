@@ -130,7 +130,7 @@ const QuadSkates = () => {
       </section>
 
       {/* Products Grid */}
-      <section className="py-10 md:py-24 bg-gradient-to-br from-pink-100 via-purple-100 to-transparent">
+      <section className="py-10 md:py-24 bg-gradient-to-br from-orange-200 via-blue-200 to-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {loading
