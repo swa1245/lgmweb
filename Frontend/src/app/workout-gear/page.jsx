@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { DollarSign, Zap, Star } from "lucide-react";
 
 const WorkoutGear = () => {
@@ -63,16 +64,7 @@ const WorkoutGear = () => {
       category: "Professional workout-gear",
       countInStock: 15,
     },
-    // {
-    //   id: "parchute-with-harness-6",
-    //   name: "Parchute With Harness",
-    //   slug: "parchute-with-harness",
-    //   description: "Performance inline skate with 4-wheel setup",
-    //   price: 500,
-    //   image: "/assets/131 - Parchute With Harness/1000211284.png",
-    //   category: "Professional workout-gear",
-    //   countInStock: 15,
-    // },
+    
   ];
 
   const fetchProducts = () => {
@@ -211,17 +203,11 @@ const WorkoutGear = () => {
                         </p>
 
                         {/* Button */}
-                        <button
-                          disabled={!inStock}
-                          onClick={() => router.push(`/${product.slug}`)}
-                          className={`mt-6 w-full py-2 rounded-lg flex justify-center items-center gap-2 font-semibold text-base transition-all duration-300 ${
-                            inStock
-                              ? "bg-gray-900 text-white hover:bg-gray-800"
-                              : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                          }`}
-                        >
-                          Shop Now
-                          {inStock && (
+                        {inStock ? (
+                          <Link href={`/${product.slug}`}
+                            className={`mt-6 w-full py-2 rounded-lg flex justify-center items-center gap-2 font-semibold text-base transition-all duration-300 bg-gray-900 text-white hover:bg-gray-800`}
+                          >
+                            Shop Now
                             <svg
                               className="w-4 h-4"
                               fill="none"
@@ -235,8 +221,15 @@ const WorkoutGear = () => {
                                 d="M9 5l7 7-7 7"
                               />
                             </svg>
-                          )}
-                        </button>
+                          </Link>
+                        ) : (
+                          <button
+                            disabled
+                            className="mt-6 w-full py-2 rounded-lg flex justify-center items-center gap-2 font-semibold text-base transition-all duration-300 bg-gray-300 text-gray-500 cursor-not-allowed"
+                          >
+                            Shop Now
+                          </button>
+                        )}
                       </div>
                     </div>
                   );
