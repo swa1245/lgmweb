@@ -18,7 +18,7 @@ export default function CategoryWrapper() {
     "/guardset-ezeefit",
     "/helmets",
     "/accessories",
-    "/shoes-frame",
+    "/shoe-frame",
     "/baby-tenacity",
     "/hangers",
     "/spacers-axle-adapter",

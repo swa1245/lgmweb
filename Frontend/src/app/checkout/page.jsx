@@ -560,6 +560,25 @@ export default function CheckoutPage() {
                   </svg>
                   {deliveryMessage}
                 </div>
+                
+                {/* Delivery and Return Policy */}
+                <div className="mt-3 pt-3 border-t border-gray-200">
+                  <h4 className="font-medium text-gray-800 text-sm mb-2">Delivery & Return Policy</h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-start text-xs text-gray-600">
+                      <svg className="w-3 h-3 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>All orders will start after two working day from office once the payment confirmed in bank. Bulk order will take 1 week, or More excluding holidays.</span>
+                    </li>
+                    <li className="flex items-start text-xs text-gray-600">
+                      <svg className="w-3 h-3 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>Any goods bought, if you have to return should be done in 2 weeks or else it wont be accepted. The return goods should be returned in same the condition with all the accessories as they were purchased or wont be accepted.</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

@@ -120,10 +120,10 @@ export default function Hangers() {
         {/* Header */}
         <div className="border-b border-gray-200 mb-8">
           <h1 className="text-4xl font-bold font-['Arimo'] text-gray-900 mb-2">
-            Quad & Inline Bearings
+            Helmets
           </h1>
           <p className="text-lg text-gray-600 mb-6 font-['Arimo']">
-            Professional-grade bearings for optimal performance.
+            Professional-grade helmets for optimal performance.
           </p>
           <div className="flex items-center justify-between pb-6">
             <p className="text-gray-600">{products.length} products</p>

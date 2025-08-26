@@ -300,7 +300,7 @@ export default function ProfilePage() {
                             <TruckIcon className="w-4 h-4 text-blue-600" />
                             <span className="text-sm text-gray-700">Estimated Delivery:</span>
                             <span className="text-sm font-medium text-gray-900">
-                              {new Date(new Date(order.createdAt).getTime() + 5 * 24 * 60 * 60 * 1000).toLocaleDateString("en-IN", {
+                              {new Date(new Date(order.createdAt).getTime() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString("en-IN", {
                                 month: 'short',
                                 day: 'numeric'
                               })}

@@ -130,7 +130,7 @@ const categories = [
   { name: "GuardSet & Ezeefit", link: "/guardset-ezeefit" },
   { name: "Helmets", link: "/helmets" },
   { name: "Accessories", link: "/accessories" },
-  { name: "Shoes & Frame", link: "/shoes-frame" },
+  { name: "Shoes & Frame", link: "/shoe-frame" },
   { name: "Baby & Tenacity Skate", link: "/baby-tenacity" },
   { name: "Hangers", link: "/hangers" },
   // { name: "Spacers-Axle-Adapter", link: "/spacers-axle-adapter" },
