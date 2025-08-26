@@ -13,6 +13,7 @@ const HQQuadPackagePage = () => {
   const router = useRouter();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   // selections shape: { [productId]: { color: string, size: string } }
   const [selections, setSelections] = useState({});
