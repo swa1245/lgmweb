@@ -8,7 +8,7 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Removed 'output: export' to enable dynamic routing
+  output: 'export',
   distDir: 'dist',
   images: {
     remotePatterns: [
@@ -20,8 +20,6 @@ const nextConfig = {
     ],
     unoptimized: true,
   },
-  // Added trailingSlash for better compatibility with static hosting
-  trailingSlash: true,
 };
 
 export default nextConfig;
