@@ -16,8 +16,8 @@ const BasicFullSetPage = () => {
   // Product details
   const product = {
     id: "basic-full-set",
-    name: "Rubber Wheel Package + Bag",
-    price: 5040,
+    name: "Basic Full Set Package",
+    price: 12000,
     description: "Complete quad skate package for beginners with all essentials",
     image: "/assets/quad-skates/basic-set.jpg", // Replace with actual image path
     features: [
@@ -39,6 +39,49 @@ const BasicFullSetPage = () => {
       "Package Includes": "Pair of quad skates, protective gear set"
     }
   };
+
+  // Additional product options
+  const additionalProducts = [
+    {
+      id: "A0015",
+      name: "Rubber Wheel Package + Bag",
+      price: 5040,
+      description: "Premium rubber wheels with carrying bag for quad skates",
+      image: "/assets/quad-skates/rubber-wheel-package.jpg", // Replace with actual image path
+      features: [
+        "High-quality rubber wheels for smooth rolling",
+        "Durable carrying bag included",
+        "Perfect for indoor and outdoor skating",
+        "Easy to install"
+      ]
+    },
+    {
+      id: "A0016",
+      name: "Tyro Wheel Package + Bag",
+      price: 6160,
+      description: "Professional-grade wheels for beginners with storage bag",
+      image: "/assets/quad-skates/tyro-wheel-package.jpg", // Replace with actual image path
+      features: [
+        "Beginner-friendly wheel hardness",
+        "Enhanced grip for better control",
+        "Stylish storage bag included",
+        "Compatible with all standard quad frames"
+      ]
+    },
+    {
+      id: "A0017",
+      name: "Hyper Rollo Package + Bag",
+      price: 7280,
+      description: "High-performance wheels with premium carrying case",
+      image: "/assets/quad-skates/hyper-rollo-package.jpg", // Replace with actual image path
+      features: [
+        "Competition-grade wheels for advanced skaters",
+        "Precision-engineered for speed and control",
+        "Deluxe carrying case with compartments",
+        "Includes installation tool kit"
+      ]
+    }
+  ];
 
   useEffect(() => {
     // Check if product is in stock (from localStorage or could be from API)
@@ -175,6 +218,66 @@ const BasicFullSetPage = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Additional Products Section */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">Recommended Add-ons</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {additionalProducts.map((item) => (
+              <div key={item.id} className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div className="p-4 bg-gradient-to-br from-blue-50 to-purple-50">
+                  <img 
+                    src={item.image} 
+                    alt={item.name} 
+                    className="w-full h-48 object-contain"
+                  />
+                </div>
+                
+                <div className="p-6">
+                  <div className="flex justify-between items-start">
+                    <h3 className="text-lg font-bold text-gray-900">{item.name}</h3>
+                    <span className="font-bold text-blue-600">₹{item.price}</span>
+                  </div>
+                  
+                  <p className="mt-2 text-sm text-gray-600">{item.description}</p>
+                  
+                  <div className="mt-4">
+                    <h4 className="font-medium text-gray-900 mb-2">Features:</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      {item.features.map((feature, index) => (
+                        <li key={index} className="flex items-start">
+                          <span className="text-green-500 mr-2">✓</span>
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <button
+                    onClick={() => {
+                      addToCart({
+                        ...item,
+                        quantity: 1,
+                      });
+                      toast.success(`${item.name} added to cart!`, {
+                        style: {
+                          borderRadius: '10px',
+                          background: '#333',
+                          color: '#fff',
+                        },
+                      });
+                    }}
+                    className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+                  >
+                    <FiShoppingCart size={18} />
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

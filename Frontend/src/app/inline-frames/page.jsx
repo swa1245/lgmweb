@@ -72,20 +72,85 @@ export default function Hangers() {
 
 const products = [
   {
-    id: "inline-frame-flash",
-    name: "Inline Frame(flash)",
-    price: 17000,
-    image: flash1,
-    images: [flash1, flash2],
+    id: "A0025-viper-package-bag",
+    name: "Viper Package + Bag",
+    price: 9520,
+    image: img1,
+    images: [img1, img2],
     countInStock: 15,
     description:
-      "Performance inline skate featuring a nimble 4-wheel configuration for higher speeds and maneuverability.",
+      "Complete Viper skating package with a matching carry bag for easy transport.",
     specs: {
-      brand: "Rapid",
+      brand: "Viper",
       wheelSetup: "4 Wheel",
       frame: "Aluminium",
     },
-  }
+  },
+  
+  {
+    id: "A0026-omen-package-bag",
+    name: "Omen Package + Bag",
+    price: 11200,
+    image: img1,
+    images: [img1, img2],
+    countInStock: 15,
+    description:
+      "High-performance Omen skating package with bag included for convenience.",
+    specs: {
+      brand: "Omen",
+      wheelSetup: "4 Wheel",
+      frame: "Aluminium",
+    },
+  },
+  
+  {
+    id: "A0027-yoru-package-bag",
+    name: "Yoru Package + Bag",
+    price: 12880,
+    image: img1,
+    images: [img1, img2],
+    countInStock: 15,
+    description:
+      "Yoru skating package designed for speed and comfort, complete with bag.",
+    specs: {
+      brand: "Yoru",
+      wheelSetup: "4 Wheel",
+      frame: "Aluminium",
+    },
+  },
+  
+  {
+    id: "A0028-hq-viper-package-bag",
+    name: "HQ Shoes Aluminium VIPER Package + HQ Bag",
+    price: 14224,
+    image: img1,
+    images: [img1, img2],
+    countInStock: 15,
+    description:
+      "Premium HQ Shoes with Aluminium Viper frame package, comes with HQ branded bag.",
+    specs: {
+      brand: "HQ",
+      wheelSetup: "4 Wheel",
+      frame: "Aluminium",
+    },
+  },
+  
+  {
+    id: "A0029-nivia-omen-package-bag",
+    name: "NIVIA Aluminium OMEN Package + HQ Bag",
+    price: 15568,
+    image: img1,
+    images: [img1, img2],
+    countInStock: 15,
+    description:
+      "NIVIA Aluminium Omen package paired with HQ branded bag for durability and style.",
+    specs: {
+      brand: "NIVIA",
+      wheelSetup: "4 Wheel",
+      frame: "Aluminium",
+    },
+  },
+  
 ];
 
 

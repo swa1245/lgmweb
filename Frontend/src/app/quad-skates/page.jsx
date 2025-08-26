@@ -68,7 +68,7 @@ const QuadSkates = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-200 via-purple-200 to-white font-['Arimo']">
+    <div className="min-h-screen bg-gradient-to-br from-orange-200 via-orange-200 to-white font-['Arimo']">
       {/* Hero Section */}
       <section className="relative overflow-hidden py-6 md:py-5">
         <div className="container mx-auto px-4">
