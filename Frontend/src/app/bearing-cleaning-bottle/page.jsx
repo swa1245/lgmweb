@@ -13,7 +13,6 @@ export default function BearingCleaningBottle() {
   const router = useRouter();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [quantity, setQuantity] = useState(1);
   
   // selections shape: { [productId]: { color: string, size: string } }
   const [selections, setSelections] = useState({});
@@ -50,13 +49,13 @@ export default function BearingCleaningBottle() {
 
   const handleAddToCart = () => {
     const { color = "", size = "" } = selections[product.id] || {};
-    addToCart({ ...product, selectedColor: color, selectedSize: size, quantity });
+    addToCart({ ...product, selectedColor: color, selectedSize: size, quantity: 1 });
     toast.success(`${product.name} added to cart!`);
   };
 
   const handleBuyNow = () => {
     const { color = "", size = "" } = selections[product.id] || {};
-    addToCart({ ...product, selectedColor: color, selectedSize: size, quantity });
+    addToCart({ ...product, selectedColor: color, selectedSize: size, quantity: 1 });
     router.push("/checkout");
   };
 
@@ -217,25 +216,6 @@ export default function BearingCleaningBottle() {
               <p className="text-gray-600 mb-4">{product.description}</p>
 
               <div className="space-y-4">
-                {/* Quantity Selector */}
-                <div className="mb-4">
-                  <label className="block text-gray-700 mb-2">Quantity</label>
-                  <div className="flex items-center">
-                    <button 
-                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="bg-gray-200 px-3 py-1 rounded-l"
-                    >
-                      -
-                    </button>
-                    <span className="bg-gray-100 px-4 py-1">{quantity}</span>
-                    <button 
-                      onClick={() => setQuantity(quantity + 1)}
-                      className="bg-gray-200 px-3 py-1 rounded-r"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
 
                 {/* Price + CTAs */}
                 <div className="flex justify-between items-center gap-2">
